@@ -1,0 +1,103 @@
+<odoo>
+
+    <record id="view_job_position_tree" model="ir.ui.view">
+        <field name="name">job.position.tree</field>
+        <field name="model">job.position</field>
+        <field name="arch" type="xml">
+            <tree string="Job Positions">
+                <field name="name"/>
+                <field name="location" />
+                <field name="experience_level"/>
+                <field name="requirements" widget="many2many_tags"/>
+                <field name="status" />
+            </tree>
+        </field>
+    </record>
+
+    
+
+
+    <record id="view_job_position_form" model="ir.ui.view">
+        <field name="name">job.position.form</field>
+        <field name="model">job.position</field>
+        <field name="arch" type="xml">
+            <form string="Job Position">
+                <sheet>
+                    <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="description" />
+                        <field name="requirements" string="Skills" widget="many2many_tags"/>
+                        <field name="location" />
+                        <field name="salary" />
+                        <field name="currency_id" />       
+                    </group>
+                    <group>
+                        
+                        <field name="job_type" />
+                        <field name="openings" />
+                        <field name="deadline" />
+                        <field name="experience_level"/>
+                        <field name="posting_date" />
+                        <field name="status" />
+                    </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+   
+    <record id="view_job_position_kanban" model="ir.ui.view">
+    <field name="name">job.position.kanban</field>
+    <field name="model">job.position</field>
+    <field name="arch" type="xml">
+        <kanban string="Job Positions">
+            <field name="name"/>
+            <field name="status"/>
+            <field name="location"/>
+            <field name="salary"/>
+            <field name="job_type"/>
+            <field name="currency_id"/>
+            
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="o_kanban_card o_responsive">
+                        
+                        <div class="o_kanban_title">
+                            <strong><field name="name"/></strong>
+                        </div>
+                        <div>
+                            <span> 
+                                <field name="requirements" widget="many2many_tags"/>
+                            </span>
+                        </div>
+                        <div>
+                            <button name="%(action_applicants_by_position)d" type="action" string="View Applicants" class="btn-primary" icon="fa-users"/>
+                        </div>
+                        <div class="o_kanban_salary">
+                            <span>
+                                <field name="salary" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            </span>
+                        </div>
+                        <div class="o_kanban_location">
+                            <i class="fa fa-map-marker-alt"></i>
+                            <field name="location"/>
+                        </div>
+                        <div>
+                            <span t-if="record.status.raw_value == 'open'" style="color: #28a745;">Open</span>
+                            <span t-if="record.status.raw_value == 'closed'" style="color: #dc3545;">Closed</span>
+                            <span t-if="record.status.raw_value == 'on_hold'" style="color: #ffc107;">On Hold</span>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+   
+</odoo>

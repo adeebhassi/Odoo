@@ -1,0 +1,45 @@
+<odoo>
+    <record id="view_job_application_tree" model="ir.ui.view">
+        <field name="name">job.application.tree</field>
+        <field name="model">job.application</field>
+        <field name="arch" type="xml">
+            <tree string="Job Applications">
+                <field name="name" />
+                <field name="position_id" />
+                <field name="status" />
+            </tree>
+        </field>
+    </record>
+
+    
+    <record id="view_job_application_form" model="ir.ui.view">
+        <field name="name">job.application.form</field>
+        <field name="model">job.application</field>
+        <field name="arch" type="xml">
+            <form string="Job Application">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="phone"/>
+                        </group>
+                        <group>
+                            <field name="position_id"/>
+                            <field name="status"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Cover Letter">
+                            <field name="cover_letter" widget="text" placeholder="Enter cover letter..."/>
+                        </page>
+                        <page string="Resume">
+                            <field name="resume" filename="resume_filename"/>
+                            <field name="resume_filename" invisible="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

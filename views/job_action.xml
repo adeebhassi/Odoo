@@ -1,0 +1,32 @@
+<odoo>
+    <record id="action_job_position_list" model="ir.actions.act_window">
+        <field name="name">Job Positions</field>
+        <field name="res_model">job.position</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record id="action_job_position_list_readonly" model="ir.actions.act_window">
+        <field name="name">Job Posting Readonly</field>
+        <field name="res_model">job.position</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('view_job_position_tree_readonly')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_job_position_form_readonly')})]"/>
+    </record>
+
+    <record id="action_job_application_list" model="ir.actions.act_window">
+        <field name="name">Job Applications</field>
+        <field name="res_model">job.application</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+
+    <record id="action_applicants_by_position" model="ir.actions.act_window">
+        <field name="name">Applicants</field>
+        <field name="res_model">job.application</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_position_id': active_id}</field>
+        <field name="domain">[('position_id', '=', active_id)]</field>
+    </record>
+
+</odoo>

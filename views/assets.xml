@@ -1,0 +1,8 @@
+<odoo>
+    <!-- Backend assets -->
+    <template id="assets_backend" name="My Custom Module Assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/my_module/static/src/css/custom.css"/>
+        </xpath>
+    </template>
+</odoo>
